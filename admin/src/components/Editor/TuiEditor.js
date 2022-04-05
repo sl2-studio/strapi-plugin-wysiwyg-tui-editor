@@ -30,7 +30,9 @@ export default forwardRef(function TuiEditor(
       <Editor
         ref={editorRef}
         usageStatistics={false}
-        initialEditType="markdown"
+        initialEditType='markdown'
+        previewStyle='vertical'
+        hideModeSwitch={true}
         initialValue={value}
         height={height}
         onChange={handleDocChange}
