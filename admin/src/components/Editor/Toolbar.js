@@ -13,14 +13,14 @@ export default function Toolbar({
 }) {
   return (
     <ToolbarLayout>
-      <Button
+      {/* <Button
         type="button"
         onClick={onChangePreviewStyle}
         startIcon={<SwitchIcon />}
         variant="secondary"
       >
-        {previewStyle === 'vertical' ? 'Tabbed preview' : 'Sided preview'}
-      </Button>
+        {previewStyle === 'Tabbed preview'}
+      </Button> */}
       <Button
         type="button"
         startIcon={<MediaIcon />}

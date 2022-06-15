@@ -36,7 +36,7 @@ export default function Editor({
   }, [width]);
 
   function toggleStyle() {
-    setPreviewStyle((style) => (style === 'vertical' ? 'tab' : 'vertical'));
+    setPreviewStyle((style) => (style == 'tab'));
   }
 
   const title = (

@@ -21,7 +21,7 @@ export default forwardRef(function TuiEditor(
       console.error('editor instance not found');
       return;
     }
-    const md = instance.getMarkdown();
+    const md = instance.getMarkdown().replaceAll('(www', '(//www');
     onChange({ target: { name, value: md } });
   }
 
@@ -34,9 +34,30 @@ export default forwardRef(function TuiEditor(
         previewStyle='vertical'
         hideModeSwitch={true}
         initialValue={value}
+        hideModeSwitch={true}
         height={height}
         onChange={handleDocChange}
         {...props}
+        previewStyle='tab'
+        toolbarItems={[
+          'heading',
+          'bold',
+          'italic',
+          'strike',
+          'divider',
+          'hr',
+          'quote',
+          'divider',
+          'ul',
+          'ol',
+          'task',
+          'indent',
+          'outdent',
+          'divider',
+          'table',
+          'link'
+        ]}
+      
       />
     </EditorWrapper>
   ) : (
