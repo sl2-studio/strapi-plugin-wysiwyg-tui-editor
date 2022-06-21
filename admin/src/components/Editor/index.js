@@ -36,7 +36,7 @@ export default function Editor({
   }, [width]);
 
   function toggleStyle() {
-    setPreviewStyle((style) => (style == 'tab'));
+    setPreviewStyle((style) => (style === 'tab'));
   }
 
   const title = (
@@ -45,14 +45,21 @@ export default function Editor({
       {required && <Required>*</Required>}
     </FieldLabel>
   );
-
+  const toolbar = (isFlyout) => (
+    <Toolbar
+      previewStyle={previewStyle}
+      onChangePreviewStyle={toggleStyle}
+      onAddMedia={() => toggleMediaLib(true)}
+      onExpand={!isFlyout && (() => toggleFlyout(true))}
+    />
+  );
   const editor = useMemo(
     () => (
       <TuiEditor
         ref={editorRef}
         name={name}
         value={value}
-        previewStyle='tab'
+        previewStyle={previewStyle}
         onChange={onChange}
         disabled={disabled}
         height={showFlyout ? flyoutEditorHeight : undefined}
@@ -68,8 +75,29 @@ export default function Editor({
           {title}
           {labelAction}
         </Header>
+        {toolbar(false)}
       </HeaderLayout>
-      {editor}
+      {showFlyout ? (
+        <FlyoutWrapper>
+          <Flyout
+            name={name}
+            isOpen={showFlyout}
+            onClose={() => toggleFlyout(false)}
+            header={title}
+            style={FLYOUT_STYLE}
+          >
+            {toolbar(true)}
+            {editor}
+          </Flyout>
+        </FlyoutWrapper>
+      ) : (
+        editor
+      )}
+      <MediaLib
+        isOpen={showMediaLib}
+        onClose={() => toggleMediaLib(false)}
+        editor={editorRef.current?.getInstance()}
+      />
     </div>
   );
 }

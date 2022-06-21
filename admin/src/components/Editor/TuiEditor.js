@@ -30,7 +30,7 @@ export default forwardRef(function TuiEditor(
       <Editor
         ref={editorRef}
         usageStatistics={false}
-        initialEditType='wysiwyg'
+        initialEditType='markdown'
         previewStyle='vertical'
         hideModeSwitch={true}
         initialValue={value}
